@@ -42,16 +42,39 @@ module.exports = {
 	plugins: [
 		new CleanWebpackPlugin(['./app/dist']),
 		new HtmlWebpackPlugin({
-			title: 'Caching'
+			template: './app/index.html'
 		}),
 		new webpack.HashedModuleIdsPlugin(),
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'vendor'
 		}),
+		new webpack.NoEmitOnErrorsPlugin(),		
 		new ExtractTextPlugin({
 			filename: 'style/style.min.css',
 			disable: false,
 			allChunks: true
+		}),
+		new webpack.optimize.OccurrenceOrderPlugin(),
+		new OptimizeCssAssetsPlugin({
+			assetNameRegExp: /\.min\.css$/g,
+			cssProcessor: require('cssnano'),
+			cssProcessorOptions: { discardComments: { removeAll: true } },
+			canPrint: true
+		}),
+		new webpack.optimize.UglifyJsPlugin({
+			sourceMap: false,
+			mangle: false,
+			beautify: false,
+			comments: false,
+			compress: {
+				sequences     : true,
+				booleans      : true,
+				loops         : true,
+				unused      : true,
+				warnings    : false,
+				drop_console: true,
+				unsafe      : true
+			}
 		})
 	]
 }

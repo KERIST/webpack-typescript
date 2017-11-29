@@ -7,14 +7,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
 	entry: {
-		main: path.resolve(__dirname, './src/script/app.js'),
+		bundle: path.resolve(__dirname, './src/script/app.js'),
 		vendor: [
 			'react',
 			'react-dom'
 		]
 	},
 	output: {
-		filename: 'script/bundle.[name].[chunkhash].js',
+		filename: 'script/[name].[chunkhash].min.js',
 		path: path.resolve(__dirname, './dist')
 	},
 	resolve: {

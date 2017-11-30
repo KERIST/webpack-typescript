@@ -70,6 +70,6 @@ module.exports = {
 			sourceMap: false,
 			mangle: false,
 			comments: false,
-		})
-	]
+		}),
+	],
 };

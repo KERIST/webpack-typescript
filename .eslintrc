@@ -1,19 +1,31 @@
 {
-    "extends": ["standard", "standard-jsx", "es2015"],
-    "ecmaFeatures": {
-        "modules": true,
-        "spread" : true,
-        "restParams" : true
+    "extends": [
+        "standard",
+        "standard-jsx",
+        "es2015",
+        "eslint:recommended",
+        "google"
+    ],
+    // "ecmaFeatures": {
+    //     "modules": true,
+    //     "spread": true,
+    //     "restParams": true
+    // },
+    "env": {
+        "browser": true,
+        "node": true,
+        "es6": true
     },
-    "env" : {
-        "browser" : true,
-        "node" : true,
-        "es6" : true
-    },
-    "rules" : {
-        "no-unused-vars" : 2,
-        "no-undef" : 2
-    },
+    "rules": {
+        "no-unused-vars": 2,
+        "no-undef": 2,
+        "linebreak-style": ["error", "windows"],
+        "semi": ["error", "always"],
+        "indent": [2, "tab"],
+        "no-tabs": 0,
+        "comma-dangle": 2,
+        "eol-last": 2
+        },
     "parserOptions": {
         "sourceType": "module"
     }

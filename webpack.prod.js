@@ -4,6 +4,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CheckerPlugin } = require('awesome-typescript-loader');
 
 module.exports = {
 	entry: {
@@ -34,6 +35,11 @@ module.exports = {
 				},
 			},
 			{
+				test: /\.(ts|tsx)?$/,
+				exclude: /(node_modules)/,
+				loader: 'awesome-typescirpt-loader',
+			},
+			{
 				test: /\.(css|scss)?$/,
 				use: ExtractTextPlugin.extract({
 					fallback: 'style-loader',
@@ -49,6 +55,7 @@ module.exports = {
 			template: './src/index.html',
 			filename: 'index.html',
 		}),
+		new CheckerPlugin(),
 		new webpack.HashedModuleIdsPlugin(),
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'vendor',

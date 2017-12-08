@@ -1,26 +1,25 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-	entry: path.resolve(__dirname, './src/script/app.js'), output: {
+	entry: path.resolve(__dirname, './src/script/app.tsx'), 
+	output: {
 		filename: 'script/bundle.js',
 		path: path.resolve(__dirname, './dist'),
 	},
 	resolve: {
 		modules: ['node_modules', path.resolve(__dirname, './src')],
-		extensions: ['.js', '.json', '.jsx', '.css', '.scss'],
+		extensions: ['.ts', '.tsx', '.js', '.json', '.jsx', '.css', '.scss'],
 		descriptionFiles: ['package.json'],
 	},
 	module: {
 		rules: [
 			{
-				test: /\.(js|jsx)?$/,
-				loader: 'babel-loader',
+				test: /\.(ts|tsx)?$/,
 				exclude: /(node_modules)/,
-				options: {
-					presets: ['es2015', 'react', 'stage-2'],
-				},
+				loader: 'awesome-typescript-loader',
 			},
 			{
 				test: /\.(css|scss)?$/,
@@ -32,6 +31,10 @@ module.exports = {
 			},
 		],
 	},
+	externals: {
+        'react': 'react',
+        'react-dom': 'react-dom',
+    },
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: './src/index.html',
@@ -41,7 +44,7 @@ module.exports = {
 			filename: 'style/style.css',
 			disable: false,
 			allChunks: true,
-		}),
+		}),	
 	],
 	devtool: 'source-map',
 	target: 'web',
